@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails_12factor'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'acts_as_votable', '~> 0.10.0'
 
 gem 'devise_token_auth'

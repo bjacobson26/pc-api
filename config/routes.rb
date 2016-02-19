@@ -3,12 +3,11 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  root 'home#index'
+
   # You can have the root of your site routed with "root"
    namespace :api do
      namespace :v1 do
-       get '/users', to: 'users#index'
-       get '/users/:id', to: 'users#show'
-
        get '/bills', to: 'bills#index'
        match '/bills/:bill_identifier', to: 'bills#find', via: :get
        match '/bills/:bill_identifier/upvotes', to: 'bills#upvotes', via: :get
