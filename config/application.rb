@@ -8,10 +8,11 @@ Bundler.require(*Rails.groups)
 
 module CongressApi
   class Application < Rails::Application
+
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :put]
       end
     end
     # config.assets.initialize_on_precompile = false

@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    namespace :api do
      namespace :v1 do
-       resources :users, only: [:index, :show ]
-       patch '/users/:id', to: 'users#update'
+       resources :users, only: [:index, :show, :update ]
 
        get '/bills', to: 'bills#index'
        match '/bills/:bill_identifier', to: 'bills#find', via: :get

@@ -14,13 +14,16 @@ module Api
 
       def update
         @user = User.find(params[:id])
-        @user.update!(person_params)
-        render json: @user
+        if @user.update_attributes(user_params)
+          render json: @user
+        else
+          render json: @user.errors
+        end
       end
 
       private
 
-      def person_params
+      def user_params
         params.require(:user).permit(
           :name,
           :gender,
