@@ -42,7 +42,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
       t.string :party
       t.string :race
       t.integer :rank, default: 1
-      t.date   :dob
+      t.string :dob
 
       ## Tokens
       t.json :tokens
