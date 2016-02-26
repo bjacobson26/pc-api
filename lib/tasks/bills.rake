@@ -1,5 +1,4 @@
 require 'httparty'
-require 'byebug'
 # /bills?history.active=true&order=last_action_at
 API_URL = ENV['SUNLIGHT_API_URL'] 
 API_KEY = ENV['SUNLIGHT_API_KEY']
