@@ -12,4 +12,16 @@ class User < ActiveRecord::Base
   has_many :user_bills
   has_many :bills, through: :user_bills
 
+  def votes
+    Vote.where(voter_id: self.id)
+  end
+
+  def upvotes
+    votes.select { |v| v.vote_flag == true }
+  end
+
+  def downvotes
+    votes.select { |v| v.vote_flag == false }
+  end
+
 end

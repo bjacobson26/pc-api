@@ -5,64 +5,23 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  # You can have the root of your site routed with "root"
-   namespace :api do
-     namespace :v1 do
-       resources :users, only: [:index, :show, :update ]
+  namespace :api do
+    namespace :v1 do
 
-       get '/bills', to: 'bills#index'
-       match '/bills/:bill_identifier', to: 'bills#find', via: :get
-       match '/bills/:bill_identifier/upvotes', to: 'bills#upvotes', via: :get
-       match '/bills/:bill_identifier/downvotes', to: 'bills#downvotes', via: :get
-     end
-   end
+      resources :users, only: [:index, :show, :update ]
+      match '/users/:id/votes', to: 'users#votes', via: :get
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+      get '/bills', to: 'bills#index'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+      match '/bills/upvote', to: 'bills#upvote_bill', via: :post
+      match '/bills/downvote', to: 'bills#downvote_bill', via: :post
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+      match '/bills/:bill_identifier/votes', to: 'bills#votes', via: :get
+      match '/bills/:bill_identifier', to: 'bills#find', via: :get
+      match '/bills/:bill_identifier/upvotes', to: 'bills#upvotes', via: :get
+      match '/bills/:bill_identifier/downvotes', to: 'bills#downvotes', via: :get
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+    end
+  end
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

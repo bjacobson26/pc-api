@@ -21,6 +21,20 @@ module Api
         end
       end
 
+      def votes
+        user = User.find(params[:id])
+        if user.errors.any?
+          render json: { errors: user.errors }
+        else
+          render json: { 
+            total_votes: user.votes.count, 
+            total_upvotes: user.upvotes.count,
+            total_downvotes: user.downvotes.count, 
+            votes: user.votes 
+          }
+        end
+      end
+
       private
 
       def user_params
