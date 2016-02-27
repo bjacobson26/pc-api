@@ -11,7 +11,7 @@ class Bill < ActiveRecord::Base
 
   def self.find_or_create(bill_id)
     bill = Bill.where(bill_identifier: bill_id).first
-    bill.nil? ? create_bill(bill_id) : already_exists(bill_id)
+    bill.nil? ? create_bill(bill_id) : bill 
   end
 
   def total_votes
@@ -36,10 +36,6 @@ class Bill < ActiveRecord::Base
     puts "Creating new bill: #{id}"
     bill = Bill.create!(bill_identifier: id)
     bill
-  end
-
-  def self.already_exists(id)
-    puts "Bill: #{id} already exists in the DB"
   end
 
 end

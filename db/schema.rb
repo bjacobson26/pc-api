@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160217182155) do
     t.string   "party"
     t.string   "race"
     t.integer  "rank",                   default: 1
-    t.date     "dob"
+    t.string   "dob"
     t.json     "tokens"
     t.datetime "created_at"
     t.datetime "updated_at"

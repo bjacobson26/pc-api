@@ -12,22 +12,22 @@ module Api
       end
 
       def find
-        @bill = Bill.find_by_bill_identifier(params[:bill_identifier])
+        @bill = Bill.find_or_create(params[:bill_identifier])
         render json: @bill
       end
 
       def upvotes
-        @votes = Bill.find_by_bill_identifier(params[:bill_identifier]).get_likes
+        @votes = Bill.find_or_create(params[:bill_identifier]).get_likes
         render json: @votes
       end
 
       def downvotes
-        @votes = Bill.find_by_bill_identifier(params[:bill_identifier]).get_likes
+        @votes = Bill.find_or_create(params[:bill_identifier]).get_likes
         render json: @votes
       end
 
       def upvote_bill
-        bill = Bill.find_by_bill_identifier(params[:bill_identifier])
+        bill = Bill.find_or_create(params[:bill_identifier])
         user = User.find(params[:user_id])
         if bill.liked_by user
           render json: { status: "Success" }
@@ -37,7 +37,7 @@ module Api
       end
 
       def downvote_bill
-        bill = Bill.find_by_bill_identifier(params[:bill_identifier])
+        bill = Bill.find_or_create(params[:bill_identifier])
         user = User.find(params[:user_id])
         if bill.disliked_by user
           render json: { status: "Success" }
@@ -47,9 +47,9 @@ module Api
       end
 
       def votes
-        bill = Bill.find_by_bill_identifier(params[:bill_identifier])
-        if bill.errors.any?
-          render json: { errors: bill.errors }
+        bill = Bill.find_or_create(params[:bill_identifier])
+        if bill.nil?
+          render json: { errors: "This bill does not exist" }
         else
           render json: { 
             bill: bill.bill_identifier, 
